@@ -105,8 +105,8 @@ app.post("/addPeople", function(req, res){
     let data = req.body;
     console.log("data given data "+data.Tag);
     Relationship .create({
-        ForName: data.For,
-        ToName: data.To,
+        ForName: data.For.trim(),
+        ToName: data.To.trim(),
         Realtionship:data.Tag
     }, function(error, data){
         if(error){
@@ -143,6 +143,13 @@ app.post("/updatePeople", function(req, res){
 });
 
 
+app.get("/addPeople", function(req, res){
+    res.render("addpeople");
+});
+
+app.get("*", function (req, res) {
+    res.send("Sorry!! Can not find the Page .Please Go back to Homepage");
+ });
 
 app.listen("2000", function () {
     console.log("Server Started.");
