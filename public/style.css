@@ -1,0 +1,19 @@
+body { 
+    padding-top: 100px; 
+}
+div { 
+    padding: 2px; 
+}
+
+
+.navbar {
+  width: 100%;
+  background-color: rgb(233, 252, 242);
+  overflow: auto;
+}
+
+
+
+.navbar a:hover {
+  background-color: rgb(56, 165, 192);
+}

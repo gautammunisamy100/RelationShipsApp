@@ -1,0 +1,56 @@
+<% include partials/header %>
+ 
+    <div class="row">
+       <div class="col-md-8" >
+          <h1>  List of People Relationship</h1>
+       </div> 
+       <div class="col-md-4">
+              <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="Search()"  placeholder="Search Below Table" aria-label="Search">
+        </div> 
+    </div>
+    <div class="row">  
+    <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Relationship</th>
+      <th scope="col">To</th>
+      <th scope="col">Edit/Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+     <% for(var i = 0;i<relationList.length; i++){ %>
+    <tr >
+      <td><%=i+1 %></td>
+      <td><%=relationList[i].ForName%></td>
+      <td><%=relationList[i].Realtionship%></td>
+      <td><%=relationList[i].ToName%></td>
+      <td>
+      <a class="navbar-brand" href="edit/<%=relationList[i].ForName%>/<%=relationList[i].ToName%>/<%=relationList[i].Realtionship%>" >Edit </a>
+      <a class="navbar-brand" href="delete/<%=relationList[i].ForName%>/<%=relationList[i].ToName%>/<%=relationList[i].Realtionship%>" >Delete</a>
+      </td>
+    </tr>
+     <% } %>
+    </tbody>
+    </table>
+    </div>
+
+    
+<% include partials/footer %>
+<script>
+function Search() {
+    input = document.getElementById('myInput');
+    var filtervalue = input.value.toUpperCase();
+    var list= document.getElementsByTagName("tr");
+    for (var i = 1; i < list.length; i++) {
+    var a = list[i];
+    var txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filtervalue) > -1) {
+      list[i].style.display = "";
+    } else {
+     list[i].style.display = "none";
+    }
+  }
+}
+</script>
