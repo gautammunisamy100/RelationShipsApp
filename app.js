@@ -3,13 +3,17 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const fileUpload = require('express-fileupload');
+require('dotenv').config({path: __dirname + '/.env'})
 app.use(express.static("public"));
 app.use(express.static("javascript"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(fileUpload());
 
-const URI ="mongodb+srv://gautam:gautam@cluster0.icph1.mongodb.net/test?retryWrites=true&w=majority";
+const mogo_user = process.env.MOGO_KEYU;
+const mogo_password = process.env.MOGO_KEYP;
+const URI ="mongodb+srv://"+mogo_user+":"+mogo_password+"@cluster0.icph1.mongodb.net/test?retryWrites=true&w=majority";
+
 mongoose.connect(URI, {
     useNewUrlParser: true
 }, function(error){
