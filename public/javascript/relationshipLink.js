@@ -35,15 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
 }, false);
 
 let finalpersonpath =[];
+let positionvisited1 =[];
+let positionvisited2 =[];
 function myFunction(){
   var select1 = document.getElementById('selectpeople1').selectedIndex;
   var select2 = document.getElementById('selectpeople2').selectedIndex;
   var startperson = people.indexOf(document.getElementsByTagName("option")[select1].innerHTML);
-  finalperson = people.indexOf(document.getElementsByTagName("option")[select2].innerHTML);
+  var finalperson = people.indexOf(document.getElementsByTagName("option")[select2].innerHTML);
   if(startperson !=finalperson){
   finalpersonpath =[];
+  positionvisited1 =[];
+  positionvisited2 =[];
   functionpath(startperson,startperson.toString(),0,data1.length,finalperson);
-  functionpath(finalperson,finalperson.toString(),0,data1.length,startperson);
   }else if(startperson == finalperson) {
     finalpersonpath =[startperson+"|"+finalperson];
   }
@@ -57,14 +60,22 @@ function functionpath(x,s,t,m,f){
      finalpersonpath.push(s);
      return;
   }else{
-    for(let h=t;h<data1.length;h++){
+    for(let h=0;h<data1.length;h++){
       let q=h+1;
       if(data1[h]==x){
         let s1 =s+"|"+data2[h];
-         functionpath(data2[h],s1,q,m,f);
+        if(positionvisited1.indexOf(h)<0){
+          positionvisited1.push(h);
+          positionvisited2.push(h);
+          functionpath(data2[h],s1,q,m,f);
+        }
       }else if(data2[h]==x){
         let s2 =s+"|"+data1[h];
-         functionpath(data1[h],s2,q,m,f);
+        if(positionvisited2.indexOf(h)<0){
+           positionvisited2.push(h);
+           positionvisited1.push(h);
+           functionpath(data1[h],s2,q,m,f);
+        }
       }
     }
     
@@ -80,9 +91,9 @@ function CreatePath(){
       if(u == personpath.length-1){
       personpathstring += people[personpath[u]];
       }else{ 
-       personpathstring += people[personpath[u]]+"->"; 
-       } }
-      totalpersonpathString+= personpathstring+ "<br>";
+       personpathstring += people[personpath[u]]+" ----> "; 
+      }
+      }totalpersonpathString+= personpathstring+ "<br>";
   }
   var pathheader = document.getElementById('peopleRelation');
   pathheader.innerHTML = totalpersonpathString;

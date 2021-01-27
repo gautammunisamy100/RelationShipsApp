@@ -3,7 +3,7 @@
 <h1>Add Relationship Between People</h1>
 <form action="/addPeople" method="POST" enctype="multipart/form-data">
   <div class="form-group">
-    <label>Name of Person:</label>
+    <label>Name of Person one :</label>
     <input id="people1_input" type="text" class="form-control"   placeholder="Name of the Person" name="For" required >
   </div>
   <div class="form-group">
@@ -33,13 +33,11 @@
     </select>
   </div>
   <div class="form-group">
-    <label>Name of Person:</label>
+    <label>Name of Person two:</label>
     <input id="people2_input"  type="text" class="form-control"   placeholder="Relationship to the above Person Name" name="To" required >
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Add People</button>
 </form>
 
 
 <% include partials/footer %>
-</body>
-</html>
