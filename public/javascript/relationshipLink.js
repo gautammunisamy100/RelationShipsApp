@@ -37,26 +37,25 @@ document.addEventListener('DOMContentLoaded', function() {
 let finalpersonpath =[];
 let positionvisited1 =[];
 let positionvisited2 =[];
+var finalperson=-1;
 function myFunction(){
   var select1 = document.getElementById('selectpeople1').selectedIndex;
   var select2 = document.getElementById('selectpeople2').selectedIndex;
   var startperson = people.indexOf(document.getElementsByTagName("option")[select1].innerHTML);
-  var finalperson = people.indexOf(document.getElementsByTagName("option")[select2].innerHTML);
+   finalperson = people.indexOf(document.getElementsByTagName("option")[select2].innerHTML);
   if(startperson !=finalperson){
   finalpersonpath =[];
   positionvisited1 =[];
   positionvisited2 =[];
-  functionpath(startperson,startperson.toString(),0,data1.length,finalperson);
+  functionpath(startperson,startperson.toString());
   }else if(startperson == finalperson) {
     finalpersonpath =[startperson+"|"+finalperson];
   }
   CreatePath();
 }
 
-function functionpath(x,s,t,m,f){
-  if(t>m && x != f){
-       return;
-  }if(x == f){
+function functionpath(x,s){
+ if(x == finalperson){
      finalpersonpath.push(s);
      return;
   }else{
@@ -67,14 +66,14 @@ function functionpath(x,s,t,m,f){
         if(positionvisited1.indexOf(h)<0){
           positionvisited1.push(h);
           positionvisited2.push(h);
-          functionpath(data2[h],s1,q,m,f);
+          functionpath(data2[h],s1);
         }
       }else if(data2[h]==x){
         let s2 =s+"|"+data1[h];
         if(positionvisited2.indexOf(h)<0){
            positionvisited2.push(h);
            positionvisited1.push(h);
-           functionpath(data1[h],s2,q,m,f);
+           functionpath(data1[h],s2);
         }
       }
     }
